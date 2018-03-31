@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Admin zone de Sortez Couvert</title>
-	<link rel="stylesheet" type="text/css" href="ressources/style/admin.css">
-</head>
+<?php 
+$header = "Admin Sortez Couvert";
+include("header.php"); ?>
 <body>
 	<?PHP include("nav.php");?>
 	<div class="main">

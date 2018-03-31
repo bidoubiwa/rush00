@@ -1,38 +1,67 @@
 <?PHP
-
-
+include('inc.php');
+$errors = [];
 if  ($_POST['submit'] === "OK")
 {
-	if ($_POST['login'] !== "" && $_POST['passwd'] !== "")	
+	if ($_POST['mail'] !== "" && $_POST['passwd'] !== "" && $_POST['lastname'] !== "" && $_POST['firstname'] != "")
 	{
-		$pass = hash("whirlpool", $_POST['passwd']);
+		$user = [];
+		$user['pass'] = hash("whirlpool", $_POST['passwd']);
+		$user['email'] = htmlspecialchars($_POST['mail']);
+		$user['lastname'] = htmlspecialchars($_POST['lastname']);
+		$user['firstname'] = htmlspecialchars($_POST['firstname']);
+		$user['acces'] = intval($_POST['acces']);
+		if (strlen($user['firstname']) < 2 || strlen($user['firstname']) > 30)
+			$errors[] = "Prenom trop petit ou trop grand";
+		if (strlen($user['lastname']) < 2 || strlen($user['lastname']) > 50)
+			$errors[] = "Nom trop petit ou trop grand";
+		if ($user['acces'] != 1 && $user['acces'] != 0)
+			$errors[] = "GROS FDP ESSAYE PAS DE HACKER NOTRE SITE";
+		if (count($errors) == 0)
+		{
+			$row = get_all_mails($conn);
+			if (mail_doesnt_exist($user['email'], $row))
+			{
+				if (!add_user_to_db($user, $conn))
+					$errors[] = "Soucis avec l'ajout dans la base de donnee";
+				else
+					header("Location: users.php?status=ajout");
+			}
+			else
+				$errors[] = "Cet email est deja associe a un compte !";
+		}
 	}
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Admin zone de Sortez Couvert</title>
-	<link rel="stylesheet" type="text/css" href="ressources/style/admin.css">
-</head>
+<?php 
+$header = "Ajouter Utilisateurs";
+include("header.php"); ?>
 <body>
 	<?PHP include("nav.php");?>
 	<div class="main">
+<?php
+if (count($errors))
+{	?>		
+		<div class="errors"><?php
+			foreach ($errors as $error)
+				echo "$error <br/>"; ?>
+		</div>
+<?php 
+}	?>
 		<h1>Ajout d'un utilisateur</h1>
 	<form action="add_user.php" method="POST">
-		Email :<input type="text" name="mail" value="">
+		Email :<input type="email" name="mail" value="" required>
 	  <br>
-	 	Nom:<input type="text" name="lastname" value="">
+		Nom:<input type="text" name="lastname" value="" required>
 	  <br>
-	 	Prenom:<input type="text" name="firstname" value="">
+		Prenom:<input type="text" name="firstname" value="" required>
 	  <br>
-	 	Mot de passe:<input type="text" name="passwd" value="">
+		Mot de passe:<input type="text" name="passwd" value="" required>
 	  <br>
 		Acces:
 			<select name="acces">
-				<option value=1>Admin</option>
 				<option value=0>Simple User</option>
+				<option value=1>Admin</option>
 			</select>		
 	<input type="submit" name="submit" value="OK">
 	</form>

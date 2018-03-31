@@ -1,19 +1,33 @@
 <?PHP
-
-
+$succes = [];
+if ($_GET["status"] == 'ajout')
+{
+	$succes[] = "L'utilisateur a bien ete enregistre dans la base de donnee"; 
+}
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Admin zone de Sortez Couvert</title>
-	<link rel="stylesheet" type="text/css" href="ressources/style/admin.css">
-</head>
+<?php 
+$header = "Gestion des utilisateurs";
+include("header.php"); 
+?>
 <body>
 	<?PHP include("nav.php");?>
 	<div class="main">
+<?php
+if (count($succes))
+{	?>		
+		<div class="success"><?php
+			foreach ($succes as $suc)
+				echo "$suc <br/>"; ?>
+		</div>
+<?php 
+}	?>
 		<h1>Gestion des utilisateurs</h1>
-		<a class="btn"href="add_user.php">Ajouter utilisateur</a>	
+		<a class="btn"href="add_user.php">Ajouter utilisateur</a>
+		<br/>
+		<br/>
+		<br/>
+		<a class="btn"href="modif_user.php">Modifier / Supprimer un utilisateur</a>	
+		
 	</div>	
 </body>
 </html>

@@ -65,3 +65,13 @@ h3{
 	background-image: linear-gradient(to bottom, #3cfa9e, #34d989);
 	text-decoration: none;
 }
+.errors
+{
+    background-color: #ea6868;
+	padding: 10px;
+}
+.success
+{
+    background-color: #68ea78;
+	padding: 10px;
+}
