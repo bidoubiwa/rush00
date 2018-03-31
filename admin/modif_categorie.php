@@ -1,12 +1,22 @@
 <?PHP
-if  ($_POST['submit'] === "OK")
+include('inc.php');
+$errors = [];
+$success = [];
+if ($_GET['id'] != "")
 {
-	if ($_POST['mail'] !== "" && $_POST['passwd'] !== "" && $_POST['lastname'] && $_POST['firstname'])
-	{
-		$pass = hash("whirlpool", $_POST['passwd']);
-		/* ajouter dans la base de donnees avec les 5 valeurs post ( ne pas oublier acces */
-		
-	}
+	$id = intval($_GET['id']);
+	$cat = get_categories_by_id($conn, $id);
+	if ($cat == NULL)
+		header("Location: categories.php?status=fail_edit");
+}
+
+if  ($_POST['submit'] === "OK" && $_POST["name"] != "")
+{
+	$cat['name'] = htmlspecialchars($_POST["name"]);
+	if (!(update_categorie_to_db($cat, $conn)))
+		header("Location: categories.php?status=fail_edit");
+	else
+		header("Location: categories.php?status=success_edit");
 }
 ?>
 <?php 
@@ -15,20 +25,12 @@ include("header.php"); ?>
 <body>
 	<?PHP include("nav.php");?>
 	<div class="main">
+	<?PHP include("show_errors.php");?>
 		<h1>Modification d'une categorie</h1>
 		<p>Ne remplir que les champs a modifier </p>
-	<form action="modif_categorie.php" method="POST">
-		Nom de la categorie :<input type="text" name="oldname" value="">
+		<form action="modif_categorie.php?id=<?= $cat['id'] ?>" method="POST">
+		Modifier nom de la categorie :<input type="text" name="name" value="<?= $cat['name']; ?>">
 		<br>
-		Nouveau nom de la categorie :<input type="text" name="newname" value="">
-		<br>
-	 	Nouvelle image de presentation :<input type="text" name="img" value="">
-		<br>
-		Supprimer cette categorie ?:
-			<select name="delete">
-				<option value=0>Non</option>
-				<option value=1>Oui</option>
-			</select>
 	<input type="submit" name="submit" value="OK">
 	</form>
 

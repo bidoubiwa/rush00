@@ -3,5 +3,5 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?=$header?></title>
-	<link rel="stylesheet" type="text/css" href="ressources/style/admin.css?v=1">
+	<link rel="stylesheet" type="text/css" href="ressources/style/admin.css?v=3">
 </head>

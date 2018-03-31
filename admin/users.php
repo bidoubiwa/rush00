@@ -12,15 +12,7 @@ include("header.php");
 <body>
 	<?PHP include("nav.php");?>
 	<div class="main">
-<?php
-if (count($succes))
-{	?>		
-		<div class="success"><?php
-			foreach ($succes as $suc)
-				echo "$suc <br/>"; ?>
-		</div>
-<?php 
-}	?>
+	<?PHP include("show_success.php");?>
 		<h1>Gestion des utilisateurs</h1>
 		<a class="btn"href="add_user.php">Ajouter utilisateur</a>
 		<br/>

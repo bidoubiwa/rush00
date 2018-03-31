@@ -19,8 +19,7 @@ if  ($_POST['submit'] === "OK")
 			$errors[] = "GROS FDP ESSAYE PAS DE HACKER NOTRE SITE";
 		if (count($errors) == 0)
 		{
-			$row = get_all_mails($conn);
-			if (mail_doesnt_exist($user['email'], $row))
+			if (get_user_by_mail($conn, $user['email']) == NULL)
 			{
 				if (!add_user_to_db($user, $conn))
 					$errors[] = "Soucis avec l'ajout dans la base de donnee";
@@ -39,16 +38,8 @@ include("header.php"); ?>
 <body>
 	<?PHP include("nav.php");?>
 	<div class="main">
-<?php
-if (count($errors))
-{	?>		
-		<div class="errors"><?php
-			foreach ($errors as $error)
-				echo "$error <br/>"; ?>
-		</div>
-<?php 
-}	?>
-		<h1>Ajout d'un utilisateur</h1>
+	<?PHP include("show_errors.php");?>
+	<h1>Ajout d'un utilisateur</h1>
 	<form action="add_user.php" method="POST">
 		Email :<input type="email" name="mail" value="" required>
 	  <br>

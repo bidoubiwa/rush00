@@ -65,13 +65,80 @@ h3{
 	background-image: linear-gradient(to bottom, #3cfa9e, #34d989);
 	text-decoration: none;
 }
+
+.btn_del {
+	background: #d93455;
+	background-image: -webkit-linear-gradient(top, #d93455, #b82b5e);
+	background-image: -moz-linear-gradient(top, #d93455, #b82b5e);
+	background-image: -ms-linear-gradient(top, #d93455, #b82b5e);
+	background-image: -o-linear-gradient(top, #d93455, #b82b5e);
+	background-image: linear-gradient(to bottom, #d93455, #b82b5e);
+	-webkit-border-radius: 8;
+	-moz-border-radius: 8;
+	border-radius: 8px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 19px;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+}
+
+.btn_del:hover {
+	background: #fc3c46;
+	background-image: -webkit-linear-gradient(top, #fc3c46, #d9345d);
+	background-image: -moz-linear-gradient(top, #fc3c46, #d9345d);
+	background-image: -ms-linear-gradient(top, #fc3c46, #d9345d);
+	background-image: -o-linear-gradient(top, #fc3c46, #d9345d);
+	background-image: linear-gradient(to bottom, #fc3c46, #d9345d);
+	text-decoration: none;
+}
+.btn_mod {
+	background: #346bd9;
+	background-image: -webkit-linear-gradient(top, #346bd9, #2c80b8);
+	background-image: -moz-linear-gradient(top, #346bd9, #2c80b8);
+	background-image: -ms-linear-gradient(top, #346bd9, #2c80b8);
+	background-image: -o-linear-gradient(top, #346bd9, #2c80b8);
+	background-image: linear-gradient(to bottom, #346bd9, #2c80b8);  
+	-webkit-border-radius: 8;
+	-moz-border-radius: 8;
+	border-radius: 8px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 19px;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+}
+
+.btn_mod:hover {
+	background: #3c3cfa;
+	background-image: -webkit-linear-gradient(top, #3c3cfa, #4734d9);
+	background-image: -moz-linear-gradient(top, #3c3cfa, #4734d9);
+	background-image: -ms-linear-gradient(top, #3c3cfa, #4734d9);
+	background-image: -o-linear-gradient(top, #3c3cfa, #4734d9);
+	background-image: linear-gradient(to bottom, #3c3cfa, #4734d9);  
+	text-decoration: none;
+}
+
+.main table tr td
+{
+	padding : 12px;	
+}
+.main table tr th
+{
+	padding : 12px;	
+}
+
 .errors
 {
-    background-color: #ea6868;
+	background-color: #ea6868;
 	padding: 10px;
 }
 .success
 {
-    background-color: #68ea78;
+	background-color: #68ea78;
 	padding: 10px;
+}
+.checkul
+{
+	list-style-type: none;
 }
