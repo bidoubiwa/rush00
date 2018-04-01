@@ -1,0 +1,202 @@
+#header{
+	background-color: rgba(40, 40, 40, 0.9);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 80px;
+}
+#logo{
+	/*color: #0277BD;*/
+	/*background-color: white;*/
+	color: white;
+	margin: 0px;
+	margin-left: 50px;
+	width: 300px;
+	margin-top: 10px;
+	font-size: 30px;
+	text-decoration: none;
+	font-weight: 500px;
+}
+#login{
+	color: white;
+	float: right;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+    display: inline-block;
+	margin-right: 50px;
+	/*background-color: orange;*/
+}
+a{
+	text-decoration: none;
+}
+#panier{
+	color: white;
+	float: right;
+	width: 100px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 50px;
+	/*background-color: green;*/
+}
+#panier_img{
+	/*width: 50px;*/
+	/*height: auto;*/
+}
+#relou{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#banniere_top{
+	height: 100px;
+	background-size: cover;
+	position: fixed;
+	width: 100%;
+}
+#img_banniere_top{
+	height: 400px;
+	width: 100%;
+}
+#menu{
+	background-color: rgba(20, 20, 20, 0.9);
+	height: 100px;
+	width: 1200px;
+	margin-top: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	border-top-left-radius: 5px 5px;
+	border-top-right-radius: 5px 5px;
+}
+#banniere_menu{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.button_menu{
+	width: 300px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}
+#ALCOOL{
+	background-color: rgba(235,168,51,0.8);
+}
+#banniere_mid{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 900px;
+}
+#div_article{
+	width: 1200px;
+	height: 900px;
+	background-color: rgba(40, 40, 40, 0.7);
+}
+#div_article_top{
+	width: 1200px;
+	height: 400px;
+	/*background-color: blue;*/
+	display: flex;
+}
+#div_article_bot{
+	width: 1200px;
+	height: 400px;
+	/*background-color: blue;*/
+	display: flex;
+}
+#background_img{
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 105%;
+	min-height: 105%;
+	width: auto;
+	height: auto;
+	z-index: -100;
+	background-image: url('https://mcetv.fr/wp-content/uploads/2016/10/Bon-plan-sortie-La-soir%C3%A9e-G-House-Party-fait-son-grand-retour-grande.jpg') no-repeat center;
+	background-size: cover;
+	filter: blur(5px);
+}
+#top_ventes{
+	width: 1200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	color: white;
+}
+.article{
+	width: 398px;
+	height: 100%;
+	border: 1px solid rgba(251,218,141,0.1);
+	/*background-color:white;*/
+}
+.top_article{
+	/*background-color: red;*/
+	/*border: 1px solid black;*/
+	width: 400px;
+	height: 350px;
+}
+.bot_article{
+	/*background-color: blue;*/
+	/*border: 1px solid black;*/
+	width: 400px;
+	height: 350px;
+}
+.img{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 300px;
+	color: white;
+	/*background-color: blue;*/
+}
+.bot{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50px;
+	width: 400px;
+	/*background-color: rgba(235,168,51,0.2);*/
+
+	/*background-color: white;*/
+}
+.nom_prix{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	/*background-color: rgba(235,168,51,0.2);*/
+	color: white;
+}
+.prix_article{
+}
+.ajout_article{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	background-color: rgb(235,168,51);
+	width: 150px;
+	height: 80%;
+	border-radius: 20px;
+	color: white;
+
+}
+html, body{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	font-family: arial;
+
+}

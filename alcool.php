@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Sortez couvert !</title>
-	<link rel="stylesheet" type="text/css" href="ressources/style/index.css">
+	<link rel="stylesheet" type="text/css" href="ressources/style/alcool.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 </head>
@@ -26,7 +26,7 @@
 	</div>
 	<div id="banniere_mid">
 		<div id="div_article">
-		<h1 id="top_ventes">Nos top ventes !</h1>
+		<h1 id="top_ventes">Alcool !</h1>
 
 			<div id="div_article_top">
 				<div class="article" id="article1">
@@ -107,5 +107,6 @@
 		</div>
 	</div>
 	<img id="background_img" src="https://mcetv.fr/wp-content/uploads/2016/10/Bon-plan-sortie-La-soir%C3%A9e-G-House-Party-fait-son-grand-retour-grande.jpg">
+     <script type="text/javascript" src="/ressources/js/fonctions.js"></script>
 </body>
 </html>

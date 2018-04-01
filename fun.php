@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Sortez couvert !</title>
-	<link rel="stylesheet" type="text/css" href="ressources/style/index.css">
+	<a href="index.php"> <title>Sortez couvert !</title></a>
+	<link rel="stylesheet" type="text/css" href="ressources/style/fun.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 </head>
@@ -26,7 +26,7 @@
 	</div>
 	<div id="banniere_mid">
 		<div id="div_article">
-		<h1 id="top_ventes">Nos top ventes !</h1>
+		<h1 id="top_ventes">Need more fun ?</h1>
 
 			<div id="div_article_top">
 				<div class="article" id="article1">
