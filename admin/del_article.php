@@ -9,6 +9,8 @@ if ($_GET['id'] != "")
 		header("Location: articles.php?status=fail_del");
 	if (!delete_architecture_by_article_to_db($id, $conn))
 		header("Location: articles.php?status=fail_del");
+	if (!delete_cart_by_article_to_db($id, $conn))
+		header("Location: articles.php?status=fail_del");
 	header("Location: articles.php?status=success_del");
 }
 

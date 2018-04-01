@@ -1,25 +1,50 @@
 <?PHP
-if  ($_POST['submit'] === "OK")
+include('inc.php');
+$errors = [];
+if ($_GET['id'] != "")
 {
-	if ($_POST['mail'] !== "" && $_POST['passwd'] !== "" && $_POST['lastname'] && $_POST['firstname'])
+	$id = intval($_GET['id']);
+	$user = get_user_by_id($conn, $id);
+	if ($user == NULL)
+		header("Location: users.php?status=fail_edit");
+}
+if ($_POST['submit'] === "OK")
+{
+	if ($_POST['mail'] !== "" && $_POST['lastname'] !== "" && $_POST['firstname'] !== "" && $_POST['acces'] !== "")
 	{
-		$pass = hash("whirlpool", $_POST['passwd']);
-		/*verifier la validite des donnes ( unicite du mail) */
-		if ($_POST['mail'] !== "")
-		{
-			$a = 1;
-			/* ajouter dans la base de donnees avec les 5 valeurs post ( ne pas oublier acces */
-			//			echo "Utilisateur ajoute avec succes\n";
-		}
+		$user['email'] = htmlspecialchars($_POST['mail']);
+		$user['lastname'] = htmlspecialchars($_POST['lastname']);
+		$user['firstname'] = htmlspecialchars($_POST['firstname']);
+		$user['acces'] = intval($_POST['acces']);
+		if ($_POST['passwd'] !== "")
+			$user['password'] = hash("whirlpool", $_POST['passwd']);
 		else
+			$user['password'] = NULL;
+		if (strlen($user['firstname']) < 2 || strlen($user['firstname']) > 30)
+			$errors[] = "Prenom trop petit ou trop grand";
+		if (strlen($user['lastname']) < 2 || strlen($user['lastname']) > 50)
+			$errors[] = "Nom trop petit ou trop grand";
+		if ($user['acces'] != 1 && $user['acces'] != 0)
+			$errors[] = "GROS FDP ESSAYE PAS DE HACKER NOTRE SITE";
+
+		if (count($errors) == 0)
 		{
-			$b = 2;
-			//			echo "Erreur\nmail deja enregistre dans notre base de donnees\n";
+			if ($user['password'] == NULL)
+			{
+				var_dump($user);
+				if (!update_user_without_password_to_db($user, $conn))
+					$errors[] = "Soucis de l'ajout de l'utilisateur dans la base de donnee";
+			}	
+			else
+			{
+				if (!update_user_to_db($user, $conn))
+					$errors[] = "Soucis de l'ajout de l'utilisateur dans la base de donnee";
+			}
+			if (count($errors) == 0)
+				header("Location: users.php?status=success_edit");
 		}
 	}
-	else
-		$c = 3;
-	//		echo "ERREUR.\nVeuillez remplir tout les champs\n";
+
 }
 ?>
 <?php 
@@ -28,30 +53,27 @@ include("header.php"); ?>
 <body>
 	<?PHP include("nav.php");?>
 	<div class="main">
+		<?PHP include("show_errors.php");?>
 		<h1>modification d'un utilisateur</h1>
 	<p> Ne remplir que les champs a modifier </p>
-	<form action="modif_user.php" method="POST">
-		Email :<input type="text" name="oldmail" value="">
+	<form action="modif_user.php?id=<?=$id?>" method="POST">
+	Email :<input type="text" name="mail" value="<?=$user['email']?>"required>
 	  <br/>
-		Nouvel email :<input type="text" name="newmail" value="">
+	  Nom:<input type="text" name="lastname" value="<?=$user['lastname']?>"required>
 	  <br/>
-		Nouveau nom:<input type="text" name="lastname" value="">
+	  Prenom:<input type="text" name="firstname" value="<?=$user['name']?>"required >
 	  <br/>
-		Nouveau prenom:<input type="text" name="firstname" value="">
+	  Mot de passe:<input type="text" name="passwd" value="">
 	  <br/>
-		Nouveau mot de passe:<input type="text" name="passwd" value="">
-	  <br/>
-		Nouvel acces:
+		Acces:
 			<select name="acces">
 				<option value=0>Simple User</option>
-				<option value=1>Admin</option>
+				<option value=1 <?PHP
+			if ($user['acces'] == 1)
+				echo "selected";				
+?>>Admin</option>
 			</select>		
 		<br/>
-		Supprimer cet utilisateur ?:
-			<select name="delete">
-				<option value=0>Non</option>
-				<option value=1>Oui</option>
-			</select>
 	<input type="submit" name="submit" value="OK">
 	</form>
 

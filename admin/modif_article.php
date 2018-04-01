@@ -52,7 +52,7 @@ include("header.php"); ?>
 		<h1>modification d'un article</h1>
 		<p>Ne remplir que les champs a modifier </p>
 		<form action="modif_article.php?id=<?=$id?>" method="POST">
-      Modifier de l'article : <input type="text" name="name" value="<?=$article['name']?>" required>
+      Modifier le nom de l'article : <input type="text" name="name" value="<?=$article['name']?>" required>
 	  <br>
 	  Modifier prix de vente : <input type="text" name="price" value="<?=$article['price']?>" required>
 	  <br>

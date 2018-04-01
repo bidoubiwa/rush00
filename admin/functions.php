@@ -7,6 +7,14 @@ function get_user_by_mail($conn, $mail)
 	return $row;
 }
 
+function get_user_by_id($conn, $id)
+{
+	$sql = "SELECT * FROM users WHERE id = '$id'";
+	$res = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($res);
+	return $row;
+}
+
 function get_all_mails($conn)
 {
 	$res = mysqli_query($conn, "SELECT email FROM users");
@@ -62,6 +70,14 @@ function get_all_categories($conn)
 function get_all_articles($conn)
 {
 	if (!($res = mysqli_query($conn, "SELECT * FROM articles")))
+		return false;
+	$row = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return $row;
+}
+
+function get_all_users($conn)
+{
+	if (!($res = mysqli_query($conn, "Select * FROM users")))
 		return false;
 	$row = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $row;
@@ -141,6 +157,25 @@ function update_article_to_db($article, $conn)
 		return true;
 }
 
+function update_user_to_db($user, $conn)
+{
+	$sql = "UPDATE users SET name = '" . $user['firstname'] . "', lastname = '" .$user['lastname'] . "', password = '".$user['password'] . "', acces = '" . $user['acces'] ."', email = '" . $user['email']. "' WHERE id = '" . $user['id'] . "'";
+	if (!($add = mysqli_query($conn, $sql)))
+		return false;
+	else
+		return true;
+}
+
+function update_user_without_password_to_db($user, $conn)
+{
+	$sql = "UPDATE users SET name = '" . $user['firstname'] . "', lastname = '" .$user['lastname'] . "', acces = '" . $user['acces'] ."', email = '" . $user['email']. "' WHERE id = '" . $user['id'] . "'";
+
+	if (!($add = mysqli_query($conn, $sql)))
+		return false;
+	else
+		return true;
+}
+
 function update_categorie_to_db($cat, $conn)
 {
 	$sql= "UPDATE categories SET name = '" . $cat['name'] . "' WHERE id = " . $cat['id'];
@@ -186,7 +221,6 @@ function delete_architecture_by_categorie_to_db($id_cat, $conn)
 	return true;
 }
 
-
 function delete_architecture_by_article_to_db($id_article, $conn)
 {
 	$sql = "DELETE FROM architecture WHERE id_article = '" . $id_article . "'";
@@ -195,4 +229,33 @@ function delete_architecture_by_article_to_db($id_article, $conn)
 	return true;
 }
 
+function delete_user_to_db($id, $conn)
+{
+	if(!($sql = mysqli_prepare($conn, "DELETE FROM users WHERE id = ?")))
+		return false;
+	mysqli_stmt_bind_param($sql, "i", $id);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
+	return true;
+}
+
+function delete_cart_by_user_to_db($id, $conn)
+{
+	if(!($sql = mysqli_prepare($conn, "DELETE FROM panier WHERE id_user = ?")))
+		return false;
+	mysqli_stmt_bind_param($sql, "i", $id);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
+	return true;
+}
+
+function delete_cart_by_aticle_to_db($id, $conn)
+{
+	if(!($sql = mysqli_prepare($conn, "DELETE FROM panier WHERE id_article = ?")))
+		return false;
+	mysqli_stmt_bind_param($sql, "i", $id);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
+	return true;
+}
 ?>
