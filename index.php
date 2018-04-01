@@ -1,29 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sortez couvert !</title>
-	<link rel="stylesheet" type="text/css" href="ressources/style/index.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-</head>
+<?php
+include("inc.php");
+$header = "Sortez couvert !";
+$css = "index";
+
+?>
+<?php include("header.php")?>
 <body>
-	<div id="banniere_top">
-		<header id="header">
-			<a href="index.php" id="logo">SORTEZ COUVERT</a>
-			<div id="relou">
-				<a href="signin.php" id="login">Sign IN/UP</a>
-				<div id="panier"><i class="material-icons" id="panier_img">local_grocery_store</i></div>
-			</div>
-		</header>
-	</div>
-	<div id="banniere_menu">
-		<div id="menu">
-			<a href="pack.php" class="button_menu" id="PACK">PACK</a>
-			<a href="alcool.php" class="button_menu" id="ALCOOL">ALCOOL</a>
-			<a href="nourriture.php" class="button_menu" id="SOFT">NOURRITURE</a>
-			<a href="fun.php" class="button_menu" id="FUN">FUN</a>
-		</div>
-	</div>
+	<?php include("upper_nav.php")?>
+	<?php include("cat_nav.php")?>
 	<div id="banniere_mid">
 		<div id="div_article">
 		<h1 id="top_ventes">Nos top ventes !</h1>

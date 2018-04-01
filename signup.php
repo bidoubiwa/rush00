@@ -1,21 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sortez couvert !</title>
-	<link rel="stylesheet" type="text/css" href="ressources/style/signup.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-</head>
+<?php
+include("inc.php");
+$header = "Inscrit toi !";
+$css = "signup";
+$errors = [];
+if  ($_POST['submit'] === "OK")
+{
+	if ($_POST['mail'] !== "" && $_POST['passwd'] !== "" && $_POST['lastname'] !== "" && $_POST['firstname'] != "")
+	{
+		$user = [];
+		$user['pass'] = hash("whirlpool", $_POST['password']);
+		$user['email'] = htmlspecialchars($_POST['email']);
+		$user['lastname'] = htmlspecialchars($_POST['lastname']);
+		$user['firstname'] = htmlspecialchars($_POST['firstname']);
+		$user['acces'] = 0;
+		if (strlen($user['firstname']) < 2 || strlen($user['firstname']) > 30)
+			$errors[] = "Prenom trop petit ou trop grand";
+		if (strlen($user['lastname']) < 2 || strlen($user['lastname']) > 50)
+			$errors[] = "Nom trop petit ou trop grand";
+		if (strlen($user['pass']) < 6)
+			$errors[] = "Mot de passe doit faire au moins 6 caracteres";
+		if (count($errors) == 0)
+		{
+			if (get_user_by_mail($conn, $user['email']) == NULL)
+			{
+				if (!add_user_to_db($user, $conn))
+					$errors[] = "Soucis avec l'ajout dans la base de donnee";
+				else
+				{
+					$_SESSION["firstname"] = $user['firstname'];
+					$_SESSION["acces"] = 0;
+					$_SESSION["id"] = mysqli_insert_id($conn); 
+					header("Location: index.php?status=ajout");
+				}
+			}
+			else
+				$errors[] = "Cet email est deja associe a un compte !";
+		}
+	}
+}
+?>
+
+<?php include("header.php")?>
 <body>
-	<div id="banniere_top">
-		<header id="header">
-			<a href="index.php" id="logo">SORTEZ COUVERT</a>
-			<div id="relou">
-				<a href="signin.php" id="login">Sign IN/UP</a>
-				<div id="panier"><i class="material-icons" id="panier_img">local_grocery_store</i></div>
-			</div>
-		</header>
-	</div>
+	<?php include("upper_nav.php")?>
+	<?php include("show_logs.php")?>
 	<div id="banniere_menu">
 		<div id="menu">
 			<a href="signin.php" class="button_menu" id="PACK">SIGN IN</a>
@@ -24,16 +52,16 @@
 	</div>
 	<div id="banniere_mid">
 		<div id="div_article">
-			<form>
+			<form method="POST" action="signup.php">
 				<p class="text_form">Prenom :</p>
-				<input class="input" type="text" name="firstname">
+				<input class="input" type="text" name="firstname" value="<?=$_POST["firstname"]?>">
 				<p class="text_form">Nom :</p>
-				<input class="input" type="text" name="name">
+				<input class="input" type="text" name="lastname" value="<?=$_POST["lastname"]?>">
 				<p class="text_form">Mail :</p>
-				<input class="input" type="mail" name="mail">
+				<input class="input" type="mail" name="email" value="<?=$_POST["email"]?>">
 				<p class="text_form">Mot de passe :</p>
 				<input class="input" type="password" name="password">
-				<button id="sign_button">SIGN IN</button>
+				<button type="submit" name="submit" value="OK" id="sign_button">SIGN IN</button>
 			</form>
 		</div>
 	</div>

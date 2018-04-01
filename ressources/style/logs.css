@@ -1,0 +1,31 @@
+.logs
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 100px;
+	position: fixed;
+	width: 100%;
+}
+
+.errors
+{
+	display: flex;
+	align-items: center;
+	margin-top: 100px;
+	position: fixed;
+	background-color: #d28080;
+	padding: 10px;
+	color: #423737;
+	line-height: 1.5;
+	width: 70%;
+}
+
+.success
+{
+	margin: 100px;
+	position: fixed;
+	background-color: #d28080;
+	padding: 10px;
+	color: #423737;
+}

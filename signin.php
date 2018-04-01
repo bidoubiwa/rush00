@@ -1,22 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sortez couvert !</title>
-	<link rel="stylesheet" type="text/css" href="ressources/style/signin.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-</head>
+<?php
+include('inc.php');
+$header = "Connectes toi !";
+$css = "signin";
+$errors = [];
+echo "<br>";
+if ($_POST['submit'] === "OK")
+{
+	if ($_POST['mail'] !== "" && $_POST['password'] !== "")
+	{
+		$hashed = hash("whirlpool", $_POST['password']);
+		if (!($user = get_user_by_mail($conn, $_POST['mail'])))
+		{
+			header("Location: signin.php?status=wrong");
+		}
+		if ($hashed !== $user['password'])
+			header("Location: signin.php?status=wrong");
+		else
+		{
+			$_SESSION["firstname"] = $user['name'];
+			$_SESSION["acces"] = $user['acces'];
+			$_SESSION["id"] = $user['id'];
+			header("Location: index.php");
+		}
+	}
+}
+?>
+<?php include("header.php")?>
 <body>
-	<div id="banniere_top">
-		<header id="header">
-			<a href="index.php" id="logo">SORTEZ COUVERT</a>
-			<div id="relou">
-				<a href="signin.php" id="login">Sign IN/UP</a>
-				<div id="panier"><i class="material-icons" id="panier_img">local_grocery_store</i></div>
-			</div>
-		</header>
-	</div>
-	<div id="banniere_menu">
+	<?php include("upper_nav.php")?>
+		<div id="banniere_menu">
 		<div id="menu">
 			<div class="button_menu" id="PACK">SIGN IN</div>
 			<a href="signup.php" class="button_menu" id="ALCOOL">SIGN UP</a>
@@ -24,12 +36,12 @@
 	</div>
 	<div id="banniere_mid">
 		<div id="div_article">
-			<form>
+			<form method="POST" action="signin.php">
 				<p class="text_form">Mail :</p>
 				<input class="input" type="text" name="mail">
 				<p class="text_form">Mot de passe :</p>
 				<input class="input" type="password" name="password">
-				<button type="submit" id="sign_button">SIGN IN</button>
+				<button type="submit" name="submit" value="OK" id="sign_button">SIGN IN</button>
 			</form>
 		</div>
 	</div>

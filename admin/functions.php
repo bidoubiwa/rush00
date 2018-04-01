@@ -2,7 +2,8 @@
 function get_user_by_mail($conn, $mail)
 {
 	$sql = "SELECT * FROM users WHERE email = '$mail'";
-	$res = mysqli_query($conn,$sql);
+	if (!($res = mysqli_query($conn,$sql)))
+		return false ;
 	$row = mysqli_fetch_assoc($res);
 	return $row;
 }
