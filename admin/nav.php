@@ -3,4 +3,5 @@
 		<p><a href="users.php">Utilisateurs</a></p>
 		<p><a href="articles.php">Articles</a></p>
 		<p><a href="categories.php">Categories</a></p>
+		<p><a href="achats.php">Achats</a></p>
 	</div>

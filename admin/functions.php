@@ -280,18 +280,47 @@ function delete_cart_by_article_to_db($id, $conn)
 	return true;
 }
 
-
-function get_cart_by_user($id_user, $conn)
+function delete_cart_by_article_and_user($id, $id_user, $conn)
 {
-	var_dump($id_user);
-	$sql =  "SELECT id_article, id_user FROM panier WHERE id_user = " . $id_user;
-	$res = mysqli_query($conn, $sql);
-	$row = mysqli_fetch_all($res, MYSQLI_ASSOC);
-	return $row;
+	if(!($sql = mysqli_prepare($conn, "DELETE FROM panier WHERE id_article = ? AND id_user = ?")))
+		return false;
+	mysqli_stmt_bind_param($sql, "ii", $id, $id_user);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
+	return true;
 }
 
 
-function 	add_session_cart_to_db($cart, $id_user, $conn)
+function get_cart_by_user($id_user, $conn)
+{
+	$sql =  "SELECT DISTINCT id_article, id_user FROM panier WHERE id_user = " . $id_user;
+	$res = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	foreach ($row as $key => $article)
+	{
+		$sql = "SELECT COUNT(*) as count FROM panier WHERE id_user = $id_user AND id_article = " . $article["id_article"]; 
+		$res = mysqli_query($conn, $sql);
+		$art = mysqli_fetch_array($res, MYSQLI_ASSOC);
+		$row[$key]["quant"] = $art["count"]; 
+		
+		$sql = "SELECT id, name, price FROM articles WHERE id = " . $article["id_article"]; 
+		$res = mysqli_query($conn, $sql);
+		$art = mysqli_fetch_assoc($res);
+		$row[$key]["name"] = $art["name"]; 
+		$row[$key]["price"] = $art["price"];
+	}
+	return $row;
+}
+
+function get_cart_by_user_for_achat($id_user, $conn)
+{
+	$sql =  "SELECT * FROM panier WHERE id_user = " . $id_user;
+	$res = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return ($row);
+}
+
+function add_session_cart_to_db($cart, $id_user, $conn)
 {
 	if ($cart !== [])
 	{
@@ -305,13 +334,22 @@ function 	add_session_cart_to_db($cart, $id_user, $conn)
 	}
 }
 
-function truncate_cart($cart)
+function add_articles_to_achat($articles, $id_user, $conn)
 {
-	foreach($cart as $single)
+	foreach($articles as $art)
 	{
-		print_r($single);
-		echo "<br>";
+		$sql = "INSERT INTO achat (id_user, id_article) VALUES ('" . $id_user .  "', '" . $art['id_article'] .  "')";
+		if (!($add = mysqli_query($conn, $sql)))
+			return false;
 	}
+	return true;
+}
 
+function get_achats_from_db($conn)
+{
+	$sql = "SELECT * FROM achat";
+	$res = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return ($row);
 }
 ?>

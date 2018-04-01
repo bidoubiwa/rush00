@@ -3,7 +3,6 @@ include("inc.php");
 $header = "Inscrit toi !";
 $css = "signup";
 $errors = [];
-var_dump($_SESSION["panier"]);
 if  ($_POST['submit'] === "OK")
 {
 	if ($_POST['mail'] !== "" && $_POST['passwd'] !== "" && $_POST['lastname'] !== "" && $_POST['firstname'] != "")

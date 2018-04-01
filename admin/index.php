@@ -10,6 +10,7 @@ include("header.php"); ?>
 			<li><a href="users.php">Utilisateurs</a></li>
 			<li><a href="articles.php">Articles</a></li>
 			<li><a href="categories.php">Categories</a></li>
+			<li><a href="achats.php">Achats</a></li>
 		</ul>
 	</div>	
 </body>

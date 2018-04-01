@@ -15,7 +15,7 @@
 			{	?>
 				<a href="signin.php" id="login">Sign IN/UP</a>
 			<?php } ?>
-				<div id="panier"><i class="material-icons" id="panier_img">local_grocery_store</i></div>
+				<a href="panier.php"><div id="panier"><i class="material-icons" id="panier_img">local_grocery_store</i></div></a>
 			<?php
 			if ($_SESSION['firstname'] != NULL) 
 			{	?>

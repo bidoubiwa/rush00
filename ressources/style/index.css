@@ -141,3 +141,12 @@ html, body{
 	text-decoration: none;
 
 }
+
+.panier
+{
+	color: white;
+}
+.panier tr td
+{
+	padding : 20px;
+}

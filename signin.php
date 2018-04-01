@@ -3,7 +3,8 @@ include('inc.php');
 $header = "Connectes toi !";
 $css = "signin";
 $errors = [];
-var_dump($_SESSION["panier"]);
+if ($_SESSION['acces'] !== 0)
+	header("Location: index.php");
 if ($_POST['submit'] === "OK")
 {
 	if ($_POST['mail'] !== "" && $_POST['password'] !== "")

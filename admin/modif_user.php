@@ -31,7 +31,6 @@ if ($_POST['submit'] === "OK")
 		{
 			if ($user['password'] == NULL)
 			{
-				var_dump($user);
 				if (!update_user_without_password_to_db($user, $conn))
 					$errors[] = "Soucis de l'ajout de l'utilisateur dans la base de donnee";
 			}	

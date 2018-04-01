@@ -4,7 +4,7 @@ $header = "FUN !";
 $css = "index";
 $errors = [];
 $success = [];
-$errors[] =  var_dump($_SESSION["panier"]);
+//$errors[] =  var_dump($_SESSION["panier"]);
 $categories = get_all_categories($conn);
 
 if ($_GET["id"] != "")
