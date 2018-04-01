@@ -5,8 +5,13 @@ $css = "index";
 $errors = [];
 $success = [];
 //$errors[] =  var_dump($_SESSION["panier"]);
+$previous =  $_SERVER['HTTP_REFERER'];
+var_dump($previous);
 $categories = get_all_categories($conn);
-
+if (preg_match("/add_panier/"))
+{
+	$success[] = "L'article a bien ete ajoute a votre panier";
+}
 if ($_GET["id"] != "")
 {
 	$id = intval($_GET["id"]);
@@ -28,7 +33,7 @@ else
 			<div id="div_article_top">
 			<?php
 				foreach ($articles as $art)
-			{
+				{
 				$infos = get_article_by_id($conn, $art['id_article']);
 			?>	
 				<div class="article" id="article1">
@@ -47,11 +52,10 @@ else
 						</div>
 					</div>
 				</div>
-	
 		<?php } ?>
-</div>
-</div>
+		</div>
 	</div>
+</div>
 <img id="background_img" src="https://mcetv.fr/wp-content/uploads/2016/10/Bon-plan-sortie-La-soir%C3%A9e-G-House-Party-fait-son-grand-retour-grande.jpg">
 </body>
 </html>

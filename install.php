@@ -1,7 +1,7 @@
 <?php
 
 echo "test";
-if (!$conn = mysqli_connect("localhost","root","qwerty1"))
+if (!$conn = mysqli_connect("localhost","root","arobion"))
 	echo "AAA";
 else
 	echo "Connecte <br>";
@@ -39,16 +39,20 @@ if (mysqli_query($conn, $sql))
 	echo "users created successfully<br>";
 
 $users = [];
-$users[] = "INSERT INTO users (name, lastname,email, password, acces) VALUES ('admin','Monsieur', 'admin@admin.fr','123', 1)";
-$users[] = "INSERT INTO users (name, lastname,email, password, acces) VALUES ('user','Monsieur', 'user@user.fr' , '123', 0)";
+$admin = hash("whirlpool", "123");
+$user = hash("whirlpool", "123");
+$users[] = "INSERT INTO users (name, lastname,email, password, acces) VALUES ('admin','Monsieur', 'admin@admin.fr', '" . $admin . "' , 1)";
+$users[] = "INSERT INTO users (name, lastname,email, password, acces) VALUES ('user','Monsieur', 'user@user.fr' , '" .  $user . "' , 0)";
 foreach ($users as $user)
 {
 	if (mysqli_query($conn, $user)) 
 		echo "users created successfully<br>";
+	else
+		echo "User not added<br>";
 }
 $cat = "INSERT INTO categories (name, image) VALUES ('Alcool', ''), ('Nouriture', ''),  ('Fun', ''),  ('Pack', '');";
 if (mysqli_query($conn, $cat)) 
-	echo "users created successfully<br>";
+	echo "Categories created successfully<br>";
 
 $articles = [];
 $articles[] = "INSERT INTO articles (id, name, price, image, stock) VALUES (NULL, 'Vodka', '15', 'ressources/images/crystal.jpeg', '10')";
@@ -64,7 +68,7 @@ foreach ($articles as $art)
 $cat = [];
 $cat[] = "INSERT INTO architecture (id_article, id_categorie) VALUES ('1', '1'), ('2', '1'), ('3', '1'), ('5','1'), ('6', '1')";
 $cat[] = "INSERT INTO architecture (id_article, id_categorie) VALUES ('3', '2'), ('8', '2')";
-$cat[] = "INSERT INTO architecture (id_article, id_categorie) VALUES ('4', '3'), ('4', '7'), ('5', '4')";
+$cat[] = "INSERT INTO architecture (id_article, id_categorie) VALUES ('7', '3'), ('4', '3'), ('5', '4'), ('7', '4')";
 foreach ($cat as $c)
 {
 	if (mysqli_query($conn, $c)) 

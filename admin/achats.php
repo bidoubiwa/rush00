@@ -12,14 +12,19 @@ include("header.php"); ?>
 	<h1>historique des achats</h1>
 	<table>
 	<tr>
-		<th>id Utilisateur</th>
-		<th>id Produit acheté</th>
+		<th>Produit acheté</th>
+		<th>Nom</th>
+		<th>Prenom </th>
 	</tr>
 <?PHP foreach($achats as $single)
-	{ ?>
+	{ 
+		$article = get_article_by_id($conn, $single['id_article']);
+		$user = get_user_by_id($conn, $single['id_user'])
+?>
 	<tr>
-	<td><?=$single['id_user']?></td>
-	<td><?=$single['id_article']?></td>
+	<td><?=$article['name']?></td>
+	<td><?=$user['lastname']?></td>
+	<td><?=$user['name']?></td>
 	</tr>
 	<?PHP } ?>
 	</div>	
