@@ -13,4 +13,8 @@ if ($_SESSION["firstname"] == "")
 	$_SESSION["acces"] = 0;
 	$_SESSION['id'] = 0;
 }
+if ($_SESSION["panier"] === [])
+{
+	$_SESSION["panier"] = []; 
+}
 ?>

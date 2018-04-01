@@ -3,7 +3,7 @@ include('inc.php');
 $header = "Connectes toi !";
 $css = "signin";
 $errors = [];
-echo "<br>";
+var_dump($_SESSION["panier"]);
 if ($_POST['submit'] === "OK")
 {
 	if ($_POST['mail'] !== "" && $_POST['password'] !== "")
@@ -20,6 +20,7 @@ if ($_POST['submit'] === "OK")
 			$_SESSION["firstname"] = $user['name'];
 			$_SESSION["acces"] = $user['acces'];
 			$_SESSION["id"] = $user['id'];
+			add_session_cart_to_db($_SESSION["panier"], $_SESSION["id"], $conn);
 			header("Location: index.php");
 		}
 	}

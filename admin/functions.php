@@ -139,6 +139,8 @@ function get_categories_by_article($conn, $id)
 	return $cat;
 }
 
+
+
 function add_article_to_db($cat, $conn)
 {
 	$sql = "INSERT INTO articles (name, price, image) VALUES ('" . $cat['name'] .  "', '" . $cat['price'] .  "', '" . $cat['img'] .  "')";
@@ -258,6 +260,16 @@ function delete_cart_by_user_to_db($id, $conn)
 	return true;
 }
 
+function add_panier_to_db($id_user, $id_art, $conn)
+{
+	if(!($sql = mysqli_prepare($conn, "INSERT INTO panier (id_article, id_user) VALUES (?, ?)")))
+		return false;
+	mysqli_stmt_bind_param($sql, "ii", $id_art, $id_user);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
+	return true;
+}
+
 function delete_cart_by_article_to_db($id, $conn)
 {
 	if(!($sql = mysqli_prepare($conn, "DELETE FROM panier WHERE id_article = ?")))
@@ -266,5 +278,40 @@ function delete_cart_by_article_to_db($id, $conn)
 	mysqli_stmt_execute($sql);
 	mysqli_stmt_close($sql);
 	return true;
+}
+
+
+function get_cart_by_user($id_user, $conn)
+{
+	var_dump($id_user);
+	$sql =  "SELECT id_article, id_user FROM panier WHERE id_user = " . $id_user;
+	$res = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return $row;
+}
+
+
+function 	add_session_cart_to_db($cart, $id_user, $conn)
+{
+	if ($cart !== [])
+	{
+		foreach ($cart as $art)
+		{
+			for ($i = 0; $i < $art["quant"]; $i++)
+			{
+				add_panier_to_db($id_user, $art["id"], $conn);
+			}
+		}
+	}
+}
+
+function truncate_cart($cart)
+{
+	foreach($cart as $single)
+	{
+		print_r($single);
+		echo "<br>";
+	}
+
 }
 ?>

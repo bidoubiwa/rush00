@@ -3,6 +3,7 @@ include("inc.php");
 $header = "Inscrit toi !";
 $css = "signup";
 $errors = [];
+var_dump($_SESSION["panier"]);
 if  ($_POST['submit'] === "OK")
 {
 	if ($_POST['mail'] !== "" && $_POST['passwd'] !== "" && $_POST['lastname'] !== "" && $_POST['firstname'] != "")
@@ -29,7 +30,8 @@ if  ($_POST['submit'] === "OK")
 				{
 					$_SESSION["firstname"] = $user['firstname'];
 					$_SESSION["acces"] = 0;
-					$_SESSION["id"] = mysqli_insert_id($conn); 
+					$_SESSION["id"] = mysqli_insert_id($conn);
+				   	add_session_cart_to_db($_SESSION["panier"], $_SESSION["id"], $conn);
 					header("Location: index.php?status=ajout");
 				}
 			}

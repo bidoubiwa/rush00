@@ -2,7 +2,11 @@
 include("inc.php");
 $header = "FUN !";
 $css = "index";
+$errors = [];
+$success = [];
+$errors[] =  var_dump($_SESSION["panier"]);
 $categories = get_all_categories($conn);
+
 if ($_GET["id"] != "")
 {
 	$id = intval($_GET["id"]);
@@ -16,6 +20,7 @@ else
 <?php include("header.php")?>
 <body>
 	<?php include("upper_nav.php")?>
+	<?php include("show_logs.php")?>
 	<?php include("cat_nav.php")?>
 	<div id="banniere_mid">
 		<div id="div_article">
