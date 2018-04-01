@@ -49,8 +49,6 @@ $css = "index";
 						<div class="ajout_article">Ajout panier</div>
 					</div>
 				</div>
-			</div>
-			<div id="div_article_bot">
 				<div class="article" id="article4">
 					<div class="bot_article" id="top">
 						<div class="img">IMAGE</div>

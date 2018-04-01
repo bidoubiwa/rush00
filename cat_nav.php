@@ -1,9 +1,15 @@
+<?php 
+
+	$menu_cat = get_all_categories($conn);
+?>
 	<div id="banniere_menu">
 		<div id="menu">
-			<a href="pack.php" class="button_menu" id="PACK">PACK</a>
-			<a href="alcool.php" class="button_menu" id="ALCOOL">ALCOOL</a>
-			<a href="nourriture.php" class="button_menu" id="SOFT">NOURRITURE</a>
-			<a href="fun.php" class="button_menu" id="FUN">FUN</a>
+	<?php 
+		foreach ($menu_cat as $cat)
+		{ ?>
+		<a href="cat.php?id=<?= $cat["id"]?>" class="button_menu" 
+			id="<?= strtoupper($cat["name"]) ?>"><?= strtoupper($cat["name"]) ?></a>
+		<?php } ?>	
 		</div>
 	</div>
 

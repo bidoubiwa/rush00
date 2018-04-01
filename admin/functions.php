@@ -108,6 +108,14 @@ function get_article_by_id($conn, $id)
 	return ($row);
 }
 
+function get_articles_by_categorie($cat, $conn)
+{
+	$sql = "SELECT id_article FROM architecture WHERE id_categorie = '$cat'";
+	$res = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_all($res, MYSQLI_ASSOC);
+	return ($row);
+}
+
 function get_categories_by_id($conn, $id)
 {
 	$sql = "SELECT * FROM categories WHERE id = '$id'";
@@ -250,7 +258,7 @@ function delete_cart_by_user_to_db($id, $conn)
 	return true;
 }
 
-function delete_cart_by_aticle_to_db($id, $conn)
+function delete_cart_by_article_to_db($id, $conn)
 {
 	if(!($sql = mysqli_prepare($conn, "DELETE FROM panier WHERE id_article = ?")))
 		return false;
