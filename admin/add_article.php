@@ -47,9 +47,6 @@ if  ($_POST['submit'] === "OK")
 			else
 				$errors[] = "L'article existe deja";
 		}
-		echo "<pre>";
-		print_r($article);
-		echo "</pre>";
 	}
 }
 ?>
